@@ -26,29 +26,6 @@ Widget getFilterIcon(BuildContext context, FiltersViewModel viewModel) {
   return MaterialButton(
     key: Key('filterIcon'),
     onPressed: () {
-      return showGeneralDialog(
-        context: context,
-        barrierDismissible: true,
-        transitionDuration: Duration(milliseconds: 500),
-        barrierLabel: MaterialLocalizations.of(context).dialogLabel,
-        barrierColor: Colors.black.withOpacity(0.5),
-        // pageBuilder: (context, _, __) => FilterModalView(
-        //   vm: viewModel,
-        //   filters: viewModel.filters,
-        // ),
-        transitionBuilder: (context, animation, secondaryAnimation, child) {
-          return SlideTransition(
-            position: CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeOut,
-            ).drive(Tween<Offset>(
-              begin: Offset(0, -1.0),
-              end: Offset.zero,
-            )),
-            child: child,
-          );
-        },
-      );
     },
     child: Image.asset(
       viewModel.filterApplied() ? AppIcons.filterApplied : AppIcons.filter,

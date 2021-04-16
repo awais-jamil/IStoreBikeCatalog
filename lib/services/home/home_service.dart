@@ -1,20 +1,21 @@
+import 'package:istores_bike_catalog/app/app.locator.dart';
+import 'package:istores_bike_catalog/datamodels/bike.dart';
+import 'package:istores_bike_catalog/services/api/api.dart';
+import 'package:observable_ish/observable_ish.dart';
 import 'package:stacked/stacked.dart';
 import 'package:injectable/injectable.dart';
 
 
 @lazySingleton
 class HomeService with ReactiveServiceMixin {
-  PlannerService() {
-    listenToReactiveValues([]);
+  HomeService() {
+    listenToReactiveValues([_bikes]);
   }
 
+  RxList<Bike> _bikes = RxList<Bike>();
+  List<Bike> get bikes => _bikes.toList();
+
   Map<String, dynamic> _filters = {
-    // 'taskType': <TaskType>[],
-    // 'status': <TaskStatus>[],
-    // 'users': <Admin>[],
-    // 'clients': <Client>[],
-    // 'date': <DatePeriod>[],
-    // 'teams': <Team>[],
   };
 
   Map<String, dynamic> get filters => _filters;
@@ -44,12 +45,6 @@ class HomeService with ReactiveServiceMixin {
 
   void clearFilters() {
     _filters = {
-      // 'taskType': <TaskType>[],
-      // 'status': <TaskStatus>[],
-      // 'users': <Admin>[],
-      // 'clients': <Client>[],
-      // 'date': <DatePeriod>[],
-      // 'teams': <Team>[],
     };
     notifyListeners();
   }
@@ -58,4 +53,19 @@ class HomeService with ReactiveServiceMixin {
     _filters[key] = value;
     notifyListeners();
   }
+
+  Future<void> getAllBikes() async {
+    var api = locator<Api>();
+    var response = await api.getBikes();
+
+    if (response['status']) {
+      var bikesJson = response['response']['data'];
+      var tempBikes = <Bike>[];
+      for (var bike in bikesJson) {
+        tempBikes.add(Bike.fromJson(bike));
+      }
+      _bikes = RxList<Bike>.from(tempBikes.toList());
+    }
+  }
+
 }

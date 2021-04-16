@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:istores_bike_catalog/app/enums/frame_size.dart';
+import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
@@ -16,10 +15,10 @@ class Bike {
   factory Bike.fromJson(Map<String, dynamic> json) => Bike(
     id: json['id'] as int,
     name: json['name'] as String,
-    images: (json['images'] as List).toList(),
-    price: (json['price']) as int,
-    category: (json['category']) as Category,
-    frameSize: (json['frameSize']) as FrameSize,
+    images: List.from(json['images']),
+    price: json['price'] as int,
+    category: json['group'] as String,
+    frameSize: json['frameSize'] as String,
   );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -34,8 +33,8 @@ class Bike {
   @JsonKey(name: 'id')
   int id;
   String name;
-  Category category;
-  FrameSize frameSize;
+  String category;
+  String frameSize;
   @JsonKey(name: 'images')
   List<String> images;
   int price;

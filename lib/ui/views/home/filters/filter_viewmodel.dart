@@ -61,16 +61,10 @@ class FiltersViewModel extends BaseViewModel {
       onTap: () {
         var values = filters[key];
         values.remove(value);
-        // updateFilter(key, values, true);
-        // if (updatePlanner) {
-        //   _plannerService.setIsApplyingFilters(true);
-        //   _plannerService.updateFilter(key, filters[key]);
-        // }
       },
       child: Chip(
         backgroundColor: AppColors.filterChipBackground,
         label: detailTextWidgetBold(
-          // text: displayValueFromObject(key, value),
           textColor: AppColors.filterChipText,
         ),
         avatar: Icon(

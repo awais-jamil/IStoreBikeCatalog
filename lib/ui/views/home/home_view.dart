@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:istores_bike_catalog/app/theme/app_colors.dart';
+import 'package:istores_bike_catalog/ui/views/home/catalog/bike_list.dart';
 import 'package:istores_bike_catalog/ui/widgets/text_widgets.dart';
 import 'package:stacked/stacked.dart';
 
@@ -13,10 +14,7 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
           backgroundColor: AppColors.background,
-          body: model.isBusy
-              ? Center(
-                  child: CircularProgressIndicator(),
-                ) : SafeArea(
+          body: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -47,11 +45,12 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                 ) : Container(),
-                // TaskListView(),
+                BikeList(),
               ],
             ),
           ),
       ),
-      viewModelBuilder: () => HomeViewModel(),);
+      viewModelBuilder: () => HomeViewModel(),
+    );
   }
 }
