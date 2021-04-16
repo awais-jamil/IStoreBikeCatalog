@@ -17,7 +17,7 @@ class Bike {
     name: json['name'] as String,
     images: List.from(json['images']),
     price: json['price'] as int,
-    category: json['group'] as String,
+    category: json['category'] as String,
     frameSize: json['frameSize'] as String,
   );
 

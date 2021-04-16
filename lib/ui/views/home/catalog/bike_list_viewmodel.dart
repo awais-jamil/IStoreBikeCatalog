@@ -2,6 +2,7 @@ import 'package:istores_bike_catalog/app/app.locator.dart';
 import 'package:istores_bike_catalog/datamodels/bike.dart';
 import 'package:istores_bike_catalog/services/home/home_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class BikeListViewModel extends FutureViewModel{
 
@@ -18,5 +19,14 @@ class BikeListViewModel extends FutureViewModel{
     await _homeService.getAllBikes();
     bikes = _homeService.bikes;
     setBusy(false);
+  }
+
+  void updateSelectedBike(int index){
+    homeService.setSelectedBike(bikes[index]);
+  }
+
+  void navigateTo(String path){
+    var navigationService = locator<NavigationService>();
+    navigationService.navigateTo(path);
   }
 }

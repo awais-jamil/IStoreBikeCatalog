@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:istores_bike_catalog/app/app.router.dart';
 import 'package:istores_bike_catalog/app/theme/app_colors.dart';
 import 'package:istores_bike_catalog/app/theme/app_icons.dart';
 import 'package:istores_bike_catalog/datamodels/bike.dart';
@@ -37,7 +38,13 @@ class BikeList extends StatelessWidget {
                   itemCount: viewModel.bikes.length,
                   itemBuilder: (context, index) {
                     var bike = viewModel.bikes[index];
-                    return BikeTile(context, bike);
+                    return GestureDetector(
+                      onTap: () => {
+                        viewModel.updateSelectedBike(index),
+                        viewModel.navigateTo(Routes.detailView)
+                      },
+                      child: BikeTile(context, bike),
+                    );
                   }
               ),
             )
@@ -61,7 +68,7 @@ class BikeList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   titleTextWidget(text: bike.name),
-                  subTitleTextWidget(text: 'Price: ' + bike.price.toString() + 'USD')
+                  subTitleTextWidget(text: '\u0024'+bike.price.toString(), textColor: AppColors.filterChipText)
                 ],
               )
           )

@@ -15,6 +15,10 @@ class HomeService with ReactiveServiceMixin {
   RxList<Bike> _bikes = RxList<Bike>();
   List<Bike> get bikes => _bikes.toList();
 
+  RxValue<Bike> _selectedBike = RxValue<Bike>(null);
+  Bike get selectedBike => _selectedBike.value;
+  void setSelectedBike(Bike value) => _selectedBike.value = value;
+
   Map<String, dynamic> _filters = {
   };
 

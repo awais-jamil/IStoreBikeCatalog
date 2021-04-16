@@ -16,6 +16,21 @@ Widget headingTextWidget({
   );
 }
 
+Widget headingTextWidgetFontSize30({
+  String text,
+  Color textColor = Colors.black,
+  TextAlign alignment = TextAlign.left,
+  int maxLines = 1,
+}) {
+  return textWidget(
+    text: text,
+    fontSize: 30.0,
+    fontWeight: FontWeight.bold,
+    color: textColor,
+    maxLines: maxLines,
+  );
+}
+
 Widget titleTextWidget({
   String text,
   Color textColor = Colors.black,
@@ -26,7 +41,7 @@ Widget titleTextWidget({
   return textWidget(
     key: key,
     text: text,
-    fontSize: 16.0,
+    fontSize: 18.0,
     fontWeight: FontWeight.bold,
     color: textColor,
     maxLines: maxLines,
