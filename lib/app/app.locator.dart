@@ -9,8 +9,11 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../services/home/home_service.dart';
+
 final locator = StackedLocator.instance;
 
 void setupLocator() {
   locator.registerLazySingleton(() => NavigationService());
+  locator.registerLazySingleton(() => HomeService());
 }

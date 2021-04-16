@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:istores_bike_catalog/app/theme/app_colors.dart';
+import 'package:istores_bike_catalog/ui/widgets/text_widgets.dart';
 import 'package:stacked/stacked.dart';
 
+import 'filters/filter_button.dart';
+import 'filters/filters_view.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -14,8 +17,40 @@ class HomeView extends StatelessWidget {
               ? Center(
                   child: CircularProgressIndicator(),
                 ) : SafeArea(
-                    child: child
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(
+                        padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 16.0),
+                        child: headingTextWidget(text: 'IStore Bike Catalog'),
+                    ),
+                    FilterButtonView(),
+                  ],
                 ),
+                model.filterApplied
+                    ? IntrinsicHeight(
+                  child: Container(
+                    constraints: BoxConstraints.loose(
+                      Size(
+                        double.infinity,
+                        50.0,
+                      ),
+                    ),
+                    alignment: Alignment.topLeft,
+                    child: FilterChipView(
+                      filters: model.homeService.filters,
+                    ),
+                  ),
+                ) : Container(),
+                // TaskListView(),
+              ],
+            ),
+          ),
       ),
       viewModelBuilder: () => HomeViewModel(),);
   }
