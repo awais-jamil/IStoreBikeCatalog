@@ -40,7 +40,7 @@ class DetailView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    headingTextWidgetFontSize30(text: model.selectecBike.name),
+                    headingTextWidgetFontSize30(text: model.selectecBike.name, textColor: AppColors.filterSelection),
                     SizedBox(height: 10,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +48,7 @@ class DetailView extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         headingTextWidget(text: 'Category: '),
-                        headingTextWidget(text: model.selectecBike.category, textColor: AppColors.filterChipText),
+                        headingTextWidget(text: model.selectecBike.category, textColor: AppColors.filterSelection),
                       ],
                     ),
                     SizedBox(height: 10,),
@@ -58,7 +58,7 @@ class DetailView extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         headingTextWidget(text: 'Frame Size: '),
-                        headingTextWidget(text: model.selectecBike.frameSize, textColor: AppColors.filterChipText),
+                        headingTextWidget(text: model.selectecBike.frameSize, textColor: AppColors.filterSelection),
                       ],
                     ),
                     SizedBox(height: 10,),
@@ -68,7 +68,7 @@ class DetailView extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         headingTextWidget(text: 'Price: '),
-                        headingTextWidget(text: '\u0024'+model.selectecBike.price.toString(), textColor: AppColors.filterChipText),
+                        headingTextWidget(text: '\u0024'+model.selectecBike.price.toString(), textColor: AppColors.filterSelection),
                       ],
                     ),
                   ],

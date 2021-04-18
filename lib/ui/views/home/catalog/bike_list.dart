@@ -55,6 +55,7 @@ class BikeList extends StatelessWidget {
   Widget BikeTile(BuildContext context, Bike bike) {
     return Card(
       shadowColor: AppColors.filterChipBackground,
+      color: AppColors.filterSelection,
       margin: EdgeInsets.all(10),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -67,8 +68,8 @@ class BikeList extends StatelessWidget {
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  titleTextWidget(text: bike.name),
-                  subTitleTextWidget(text: '\u0024'+bike.price.toString(), textColor: AppColors.filterChipText)
+                  titleTextWidget(text: bike.name, textColor: Colors.white),
+                  subTitleTextWidget(text: '\u0024'+bike.price.toString(), textColor: Colors.white)
                 ],
               )
           )
