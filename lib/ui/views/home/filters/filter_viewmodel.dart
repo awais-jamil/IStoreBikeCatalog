@@ -42,24 +42,12 @@ class FiltersViewModel extends BaseViewModel {
   }
 
   void selectedObjects(String value, String filterType, {bool notify = true}) {
-    var selectedValues = [];
-    if (filterType == 'category') {
-      selectedValues.add(value);
-    } else if (filterType == 'frameSize') {
-      selectedValues.add(value);
-    }
-    updateFilter(filterType, selectedValues, true, notify: notify);
+    updateFilter(filterType, value, true, notify: notify);
   }
 
   void updateFilter(String filter, dynamic value, bool selected,
       {bool notify = true}) {
-    var updatedFilters = [];
-    if (filter == 'category') {
-      updatedFilters.addAll(value);
-    } else if (filter == 'frameSize') {
-      updatedFilters.addAll(value);
-    }
-    _filters[filter] = updatedFilters;
+    _filters[filter] = value;
     if (notify) notifyListeners();
   }
 
@@ -75,7 +63,7 @@ class FiltersViewModel extends BaseViewModel {
 
   void clearFilters() {
     _filters = null;
-    _homeService.setIsApplyingFilters(true);
+    _homeService.setIsApplyingFilters(false);
     _homeService.clearFilters();
   }
 
@@ -91,12 +79,12 @@ class FiltersViewModel extends BaseViewModel {
     var result = <Widget>[];
     var value = filters[key];
     if (value.isNotEmpty) {
-      for (var data in value) {
-        var chip = chipFor(key, data, updatePlanner);
+      // for (var data in value) {
+        var chip = chipFor(key, value, updatePlanner);
         if (chip != null) {
           result.add(chip);
         }
-      }
+      // }
     }
     return result;
   }
@@ -105,9 +93,7 @@ class FiltersViewModel extends BaseViewModel {
     return (value != null)
         ? GestureDetector(
       onTap: () {
-        var values = filters[key];
-        values.remove(value);
-        updateFilter(key, values, true);
+        updateFilter(key, '', true);
         if (updatePlanner) {
           _homeService.setIsApplyingFilters(true);
           _homeService.updateFilter(key, filters[key]);

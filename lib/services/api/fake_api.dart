@@ -79,7 +79,7 @@ class FakeApi extends Api {
       'data': [
         'Mountain Bike',
         'City Bike',
-        'E-bike'
+        'E-Bike'
       ]
     });
     var response;

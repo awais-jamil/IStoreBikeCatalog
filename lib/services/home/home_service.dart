@@ -13,6 +13,7 @@ class HomeService with ReactiveServiceMixin {
   }
 
   RxList<Bike> _bikes = RxList<Bike>();
+  RxList<Bike> _dummmybikes = RxList<Bike>();
   List<Bike> get bikes => _bikes.toList();
 
   RxValue<Bike> _selectedBike = RxValue<Bike>(null);
@@ -26,8 +27,8 @@ class HomeService with ReactiveServiceMixin {
   List<String> get frameSizes => _frameSizes.toList();
 
   Map<String, dynamic> _filters = {
-    'category': <String>[],
-    'frameSize': <String>[],
+    'category': '',
+    'frameSize': '',
   };
 
   Map<String, dynamic> get filters => _filters;
@@ -46,7 +47,10 @@ class HomeService with ReactiveServiceMixin {
 
   bool _applyingFilters = false;
   bool get isApplyingFilters => _applyingFilters;
-  void setIsApplyingFilters(bool val) => _applyingFilters = val;
+  void setIsApplyingFilters(bool val) {
+    _applyingFilters = val;
+    filterTheData();
+  }
 
   Future<void> applyFilters(Map<String, dynamic> f) async {
     await Future.delayed(Duration(seconds: 1), () {
@@ -57,14 +61,15 @@ class HomeService with ReactiveServiceMixin {
 
   void clearFilters() {
     _filters = {
-      'category': <String>[],
-      'frameSize': <String>[],
+      'category': '',
+      'frameSize': '',
     };
     notifyListeners();
   }
 
   void updateFilter(String key, dynamic value) {
     _filters[key] = value;
+    filterTheData();
     notifyListeners();
   }
 
@@ -79,6 +84,7 @@ class HomeService with ReactiveServiceMixin {
         tempBikes.add(Bike.fromJson(bike));
       }
       _bikes = RxList<Bike>.from(tempBikes.toList());
+      _dummmybikes = RxList<Bike>.from(tempBikes.toList());
     }
   }
 
@@ -111,6 +117,19 @@ class HomeService with ReactiveServiceMixin {
       _frameSizes = RxList<String>.from(tempData.toList());
     } else {
       _frameSizes = _frameSizes ?? <String>[];
+    }
+  }
+
+  Future<void> filterTheData() async {
+    if(filterApplied()){
+      var tempData = <Bike>[];
+      for (var item in _bikes) {
+        if (item.category == _filters['category'] || item.frameSize == _filters['frameSize'])
+          tempData.add(item);
+      }
+      _bikes = RxList<Bike>.from(tempData.toList());
+    } else {
+      _bikes = _dummmybikes;
     }
   }
 

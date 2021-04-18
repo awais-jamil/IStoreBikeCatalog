@@ -9,7 +9,7 @@ class BikeListViewModel extends FutureViewModel{
   final _homeService = locator<HomeService>();
   HomeService get homeService => _homeService;
 
-  List<Bike> bikes = [];
+  List<Bike> get bikes => _homeService.bikes;
 
   @override
   Future futureToRun() => fetchData();
@@ -19,7 +19,6 @@ class BikeListViewModel extends FutureViewModel{
     await _homeService.getAllBikes();
     await _homeService.getCategories();
     await _homeService.getFrameSizes();
-    bikes = _homeService.bikes;
     setBusy(false);
   }
 
@@ -31,4 +30,8 @@ class BikeListViewModel extends FutureViewModel{
     var navigationService = locator<NavigationService>();
     navigationService.navigateTo(path);
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_homeService];
+
 }
