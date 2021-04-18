@@ -17,6 +17,52 @@ class FiltersViewModel extends BaseViewModel {
 
   bool get isLoading => _homeService.isLoading;
 
+  List get categoryDropDown {
+    var categories = _homeService.categories;
+
+    return categories
+        .map(
+          (e) => DropdownMenuItem(
+        value: e,
+        child: subTitleTextWidget(text: e),
+      ),
+    ).toList();
+  }
+
+  List get frameSizeDropDown {
+    var frameSizes = _homeService.frameSizes;
+
+    return frameSizes
+        .map(
+          (e) => DropdownMenuItem(
+        value: e,
+        child: subTitleTextWidget(text: e),
+      ),
+    ).toList();
+  }
+
+  void selectedObjects(String value, String filterType, {bool notify = true}) {
+    var selectedValues = [];
+    if (filterType == 'category') {
+      selectedValues.add(value);
+    } else if (filterType == 'frameSize') {
+      selectedValues.add(value);
+    }
+    updateFilter(filterType, selectedValues, true, notify: notify);
+  }
+
+  void updateFilter(String filter, dynamic value, bool selected,
+      {bool notify = true}) {
+    var updatedFilters = [];
+    if (filter == 'category') {
+      updatedFilters.addAll(value);
+    } else if (filter == 'frameSize') {
+      updatedFilters.addAll(value);
+    }
+    _filters[filter] = updatedFilters;
+    if (notify) notifyListeners();
+  }
+
   bool filterApplied() {
     return _homeService.filterApplied();
   }
@@ -61,10 +107,16 @@ class FiltersViewModel extends BaseViewModel {
       onTap: () {
         var values = filters[key];
         values.remove(value);
+        updateFilter(key, values, true);
+        if (updatePlanner) {
+          _homeService.setIsApplyingFilters(true);
+          _homeService.updateFilter(key, filters[key]);
+        }
       },
       child: Chip(
         backgroundColor: AppColors.filterChipBackground,
         label: detailTextWidgetBold(
+          text: value,
           textColor: AppColors.filterChipText,
         ),
         avatar: Icon(

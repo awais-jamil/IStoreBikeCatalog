@@ -17,6 +17,8 @@ class BikeListViewModel extends FutureViewModel{
   Future<void> fetchData() async {
     setBusy(true);
     await _homeService.getAllBikes();
+    await _homeService.getCategories();
+    await _homeService.getFrameSizes();
     bikes = _homeService.bikes;
     setBusy(false);
   }

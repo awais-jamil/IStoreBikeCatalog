@@ -74,8 +74,35 @@ class FakeApi extends Api {
   }
 
   @override
-  Future<Map> getFilteredBikes(Map<String, dynamic> params) async {
+  Future<Map> getCategories() async {
+    var bikesData = jsonEncode({
+      'data': [
+        'Mountain Bike',
+        'City Bike',
+        'E-bike'
+      ]
+    });
+    var response;
+    await Future.delayed(Duration(seconds: 0));
+    response = http.Response('{"status": true, "response": $bikesData}', 200);
+    response = json.decode(response.body);
+    return response;
+  }
 
+  @override
+  Future<Map> getFrameSizes() async {
+    var bikesData = jsonEncode({
+      'data': [
+        'Small',
+        'Medium',
+        'Large'
+      ]
+    });
+    var response;
+    await Future.delayed(Duration(seconds: 0));
+    response = http.Response('{"status": true, "response": $bikesData}', 200);
+    response = json.decode(response.body);
+    return response;
   }
 
 }

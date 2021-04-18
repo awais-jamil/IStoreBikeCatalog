@@ -5,7 +5,7 @@ import 'package:istores_bike_catalog/ui/widgets/text_widgets.dart';
 import 'package:stacked/stacked.dart';
 
 import 'filters/filter_button.dart';
-import 'filters/filters_view.dart';
+import 'filters/filters_chip_view.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {

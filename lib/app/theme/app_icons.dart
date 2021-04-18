@@ -3,6 +3,8 @@ class AppIcons {
 
   static String filter = '$_basePath/filterIcon.png';
   static String filterApplied = '$_basePath/filter_applied.png';
+  static String checkboxChecked = '$_basePath/checked_box.png';
+  static String checkboxUnchecked = '$_basePath/unchecked_box.png';
   static String cityBike_one = '$_basePath/city_bike_one.jpg';
   static String cityBike_two = '$_basePath/city_bike_two.jpg';
   static String ebike_one = '$_basePath/ebike_1.jpg';

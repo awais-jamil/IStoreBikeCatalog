@@ -17,4 +17,5 @@ class AppColors {
   static const Color filterChipText = Color(0xFF028D57);
   static const Color filterChipBackground = Color(0xFFD4F2E5);
   static const Color filterSelection = Color(0xFF00567A);
+  static const Color placeholderText = Color(0xFFB7C1CB);
 }

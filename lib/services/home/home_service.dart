@@ -19,7 +19,15 @@ class HomeService with ReactiveServiceMixin {
   Bike get selectedBike => _selectedBike.value;
   void setSelectedBike(Bike value) => _selectedBike.value = value;
 
+  RxList<String> _categories = RxList<String>();
+  List<String> get categories => _categories.toList();
+
+  RxList<String> _frameSizes = RxList<String>();
+  List<String> get frameSizes => _frameSizes.toList();
+
   Map<String, dynamic> _filters = {
+    'category': <String>[],
+    'frameSize': <String>[],
   };
 
   Map<String, dynamic> get filters => _filters;
@@ -49,6 +57,8 @@ class HomeService with ReactiveServiceMixin {
 
   void clearFilters() {
     _filters = {
+      'category': <String>[],
+      'frameSize': <String>[],
     };
     notifyListeners();
   }
@@ -69,6 +79,38 @@ class HomeService with ReactiveServiceMixin {
         tempBikes.add(Bike.fromJson(bike));
       }
       _bikes = RxList<Bike>.from(tempBikes.toList());
+    }
+  }
+
+  Future<void> getCategories() async {
+    var api = locator<Api>();
+    var response = await api.getCategories();
+
+    if (response['status']) {
+      var categoryJson = response['response']['data'];
+      var tempData = <String>[];
+      for (var category in categoryJson) {
+        tempData.add(category);
+      }
+      _categories = RxList<String>.from(tempData.toList());
+    } else {
+      _categories = _categories ?? <String>[];
+    }
+  }
+
+  Future<void> getFrameSizes() async {
+    var api = locator<Api>();
+    var response = await api.getFrameSizes();
+
+    if (response['status']) {
+      var frameSizeJson = response['response']['data'];
+      var tempData = <String>[];
+      for (var frameSize in frameSizeJson) {
+        tempData.add(frameSize);
+      }
+      _frameSizes = RxList<String>.from(tempData.toList());
+    } else {
+      _frameSizes = _frameSizes ?? <String>[];
     }
   }
 
