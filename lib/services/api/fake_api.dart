@@ -11,21 +11,21 @@ class FakeApi extends Api {
       'data': [
         {
           'id': 1,
-          'name': 'Bike 1',
+          'name': 'A Mountian Bike',
           'images': <String>[
-            AppIcons.mbike_one,
-            AppIcons.mbike_two,
+            AppIcons.a_mbike,
+            AppIcons.b_mbike,
           ],
           'category': 'Mountain Bike',
           'frameSize': 'Medium',
-          'price': 150
+          'price': 70
         },
         {
           'id': 2,
-          'name': 'Bike 2',
+          'name': 'A City Bike',
           'images': <String>[
-            AppIcons.cityBike_one,
-            AppIcons.cityBike_two,
+            AppIcons.b_city_bike,
+            AppIcons.c_city_bike,
           ],
           'category': 'City Bike',
           'frameSize': 'Small',
@@ -33,36 +33,82 @@ class FakeApi extends Api {
         },
         {
           'id': 3,
-          'name': 'Bike 3',
+          'name': 'B City Bike',
           'images': <String>[
-            AppIcons.ebike_three,
-            AppIcons.ebike_one,
+            AppIcons.d_city_bike,
+            AppIcons.c_city_bike,
           ],
           'category': 'E-Bike',
           'frameSize': 'Large',
-          'price': 300
+          'price': 330
         },
         {
           'id': 4,
-          'name': 'Bike 4',
+          'name': 'A Electric Bike',
           'images': <String>[
-            AppIcons.ebike_one,
-            AppIcons.ebike_two,
+            AppIcons.b_ebike,
+            AppIcons.d_ebike,
           ],
           'category': 'E-Bike',
-          'frameSize': 'Medium',
+          'frameSize': 'Small',
           'price': 190
         },
         {
           'id': 5,
-          'name': 'Bike 5',
+          'name': 'B Electric Bike',
           'images': <String>[
-            AppIcons.cityBike_two,
-            AppIcons.cityBike_one,
+            AppIcons.a_ebike,
+            AppIcons.c_ebike,
           ],
           'category': 'City Bike',
           'frameSize': 'Medium',
           'price': 110
+        },
+        {
+          'id': 6,
+          'name': 'B Mountian Bike',
+          'images': <String>[
+            AppIcons.c_mbike,
+            AppIcons.d_mbike,
+          ],
+          'category': 'Mountain Bike',
+          'frameSize': 'Small',
+          'price': 150
+        },
+        {
+          'id': 7,
+          'name': 'C Mountian Bike',
+          'images': <String>[
+            AppIcons.mbike_one,
+            AppIcons.mbike_two,
+          ],
+          'category': 'Mountain Bike',
+          'frameSize': 'Large',
+          'price': 210
+        },
+        {
+          'id': 8,
+          'name': 'A City Bike',
+          'images': <String>[
+            AppIcons.cityBike_one,
+            AppIcons.cityBike_two,
+          ],
+          'category': 'City Bike',
+          'frameSize': 'Medium',
+          'price': 500
+        },
+        {
+          'id': 9,
+          'name': 'C Electric Bike',
+          'images': <String>[
+            AppIcons.ebike_one,
+            AppIcons.ebike_two,
+            AppIcons.ebike_three,
+            AppIcons.ebike_four,
+          ],
+          'category': 'E-Bike',
+          'frameSize': 'Large',
+          'price': 700
         },
       ]
     });

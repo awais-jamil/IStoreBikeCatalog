@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 @lazySingleton
 class HomeService with ReactiveServiceMixin {
   HomeService() {
-    listenToReactiveValues([_bikes]);
+    listenToReactiveValues([_bikes, sortedASC]);
   }
 
   RxList<Bike> _bikes = RxList<Bike>();
@@ -25,6 +25,10 @@ class HomeService with ReactiveServiceMixin {
 
   RxList<String> _frameSizes = RxList<String>();
   List<String> get frameSizes => _frameSizes.toList();
+
+  RxValue<bool> _sortedASC = RxValue<bool>(true);
+  bool get sortedASC => _sortedASC.value;
+  void setSortedASC(bool value) => _sortedASC.value = value;
 
   Map<String, dynamic> _filters = {
     'category': '',
@@ -120,11 +124,13 @@ class HomeService with ReactiveServiceMixin {
     }
   }
 
-  void filterTheData() {
+  void filterTheData() async {
     if(filterApplied()){
       var tempData = <Bike>[];
       for (var item in _bikes) {
-        if (item.category == _filters['category'] || item.frameSize == _filters['frameSize'])
+        if (item.category == _filters['category'])
+          tempData.add(item);
+        else if(item.frameSize == _filters['frameSize'])
           tempData.add(item);
       }
       _bikes = RxList<Bike>.from(tempData.toList());
@@ -133,8 +139,16 @@ class HomeService with ReactiveServiceMixin {
     }
   }
 
-  void sortByPrice(bool asc) {
+  void sortByPrice(){
+    setSortedASC(!_sortedASC.value);
 
+    if(_sortedASC.value){
+      _bikes.sort((a, b) => a.price.compareTo(b.price));
+    } else {
+      _bikes.sort((a, b) => b.price.compareTo(a.price));
+    }
+
+    notifyListeners();
   }
 
 }

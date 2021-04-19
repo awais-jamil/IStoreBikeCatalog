@@ -31,12 +31,14 @@ class HomeView extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () => {
-
+                            model.homeService.sortByPrice(),
                           },
                           child: Row(
                             children: [
                               titleTextWidget(text: 'Price'),
-                              Icon(Icons.arrow_drop_down_rounded)
+                              Icon(model.sortedASC ?
+                              Icons.arrow_drop_down_rounded:
+                              Icons.arrow_drop_up_rounded)
                             ],
                           ),
                         ),

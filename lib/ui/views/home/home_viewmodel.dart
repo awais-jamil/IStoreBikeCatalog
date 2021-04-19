@@ -7,6 +7,7 @@ class HomeViewModel extends ReactiveViewModel {
   HomeService get homeService => _homeService;
 
   bool get filterApplied => _homeService.filterApplied();
+  bool get sortedASC => _homeService.sortedASC;
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_homeService];
