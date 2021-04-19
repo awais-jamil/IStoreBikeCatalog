@@ -26,6 +26,7 @@ class _FilterButtonViewState extends State<FilterButtonView> {
 Widget getFilterIcon(BuildContext context, FiltersViewModel viewModel) {
   return MaterialButton(
     key: Key('filterIcon'),
+    minWidth: 12,
     onPressed: () {
       return showGeneralDialog(
         context: context,

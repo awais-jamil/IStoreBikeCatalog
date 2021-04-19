@@ -120,7 +120,7 @@ class HomeService with ReactiveServiceMixin {
     }
   }
 
-  Future<void> filterTheData() async {
+  void filterTheData() {
     if(filterApplied()){
       var tempData = <Bike>[];
       for (var item in _bikes) {
@@ -131,6 +131,10 @@ class HomeService with ReactiveServiceMixin {
     } else {
       _bikes = _dummmybikes;
     }
+  }
+
+  void sortByPrice(bool asc) {
+
   }
 
 }

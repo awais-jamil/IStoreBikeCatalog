@@ -27,7 +27,22 @@ class HomeView extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 16.0),
                         child: headingTextWidget(text: 'IStore Bike Catalog'),
                     ),
-                    FilterButtonView(),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => {
+
+                          },
+                          child: Row(
+                            children: [
+                              titleTextWidget(text: 'Price'),
+                              Icon(Icons.arrow_drop_down_rounded)
+                            ],
+                          ),
+                        ),
+                        FilterButtonView(),
+                      ],
+                    )
                   ],
                 ),
                 model.filterApplied
